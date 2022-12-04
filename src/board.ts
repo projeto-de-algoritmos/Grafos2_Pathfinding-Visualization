@@ -8,12 +8,15 @@ export default class Board {
   private rows: number;
   private cols: number;
 
+  private _locked = false;
+
   private start: Position;
   private end: Position;
 
   private parent: Map<number, number> = new Map();
 
   private step?: () => boolean;
+
   constructor(
     private _width: number,
     private _height: number,
@@ -83,6 +86,18 @@ export default class Board {
       this._cells.set(endParent, CellState.PATH);
       endParent = this.parent.get(endParent);
     }
+  }
+
+  public lock() {
+    this._locked = true;
+  }
+
+  public unlock() {
+    this._locked = false;
+  }
+
+  get locked() {
+    return this._locked;
   }
 
   public reset(resetWalls: boolean) {
