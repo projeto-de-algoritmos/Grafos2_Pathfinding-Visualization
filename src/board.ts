@@ -42,6 +42,47 @@ export default class Board {
     this.canvas.addEventListener("mousedown", (e) => this.handleClick(e));
   }
 
+  public render() {
+    this._cells.set(this.positionKey(this.start), CellState.START);
+    this._cells.set(this.positionKey(this.end), CellState.END);
+
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.cols; col++) {
+        this.ctx.fillStyle =
+          this._cells.get(this.positionKey({ row, col })) ?? "green";
+        this.ctx.strokeRect(
+          row * this.cellSize,
+          col * this.cellSize,
+          this.cellSize,
+          this.cellSize
+        );
+        this.ctx.fillRect(
+          row * this.cellSize,
+          col * this.cellSize,
+          this.cellSize,
+          this.cellSize
+        );
+      }
+    }
+
+    if (this.step) {
+      const result = this.step();
+      if (result) {
+        this.step = undefined;
+        this.renderPath();
+      }
+    }
+  }
+
+  private renderPath() {
+    let endParent = this.parent.get(this.positionKey(this.end));
+
+    while (endParent) {
+      this._cells.set(endParent, CellState.PATH);
+      endParent = this.parent.get(endParent);
+    }
+  }
+
   private positionKey(position: Position): number {
     return position.row * this._height + position.col;
   }
