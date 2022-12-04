@@ -251,9 +251,10 @@ export default class Board {
         const current = this._cells.get(currentKey);
 
         if (
-          current !== CellState.END &&
-          current !== CellState.START &&
-          (resetWalls && current === CellState.WALL) ||
+          (current !== CellState.END &&
+            current !== CellState.START &&
+            resetWalls &&
+            current === CellState.WALL) ||
           (!resetWalls && current !== CellState.WALL)
         ) {
           this._cells.set(currentKey, CellState.WHITE);
