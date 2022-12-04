@@ -85,6 +85,22 @@ export default class Board {
     }
   }
 
+  private getPossibleMoves(position: Position): Position[] {
+    const directions: Position[] = [
+      { row: -1, col: 0 },
+      { row: 1, col: 0 },
+      { row: 0, col: -1 },
+      { row: 0, col: 1 },
+    ];
+
+    return directions.flatMap((d) => {
+      const pos = { row: position.row + d.row, col: position.col + d.col };
+      const state = this.cells.get(this.positionKey(pos));
+
+      return state === CellState.WHITE || state === CellState.END ? [pos] : [];
+    });
+  }
+
   private positionKey(position: Position): number {
     return position.row * this._height + position.col;
   }
