@@ -79,6 +79,36 @@ export default class Board {
     }
   }
 
+  public startBfs() {
+    const queue = [this.start];
+    const visited = new Set([this.positionKey(this.start)]);
+
+    const step = () => {
+      const current = queue.shift();
+
+      if (!current) return true;
+
+      const currentKey = this.positionKey(current);
+
+      if (currentKey === this.positionKey(this.end)) return true;
+
+      this._cells.set(currentKey, CellState.BLACK);
+
+      this.getPossibleMoves(current)
+        .filter((p) => !visited.has(this.positionKey(p)))
+        .forEach((p) => {
+          const pKey = this.positionKey(p);
+          this._cells.set(pKey, CellState.GRAY);
+          visited.add(pKey);
+          this.parent.set(pKey, currentKey);
+          queue.push(p);
+        });
+
+      return false;
+    };
+
+    this.step = step;
+  }
   private renderPath() {
     let endParent = this.parent.get(this.positionKey(this.end));
 
