@@ -85,6 +85,27 @@ export default class Board {
     }
   }
 
+  public reset(resetWalls: boolean) {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.cols; col++) {
+        const currentKey = this.positionKey({ row, col });
+        const current = this._cells.get(currentKey);
+
+        if (
+          current !== CellState.END &&
+          current !== CellState.START &&
+          (resetWalls && current === CellState.WALL) ||
+          (!resetWalls && current !== CellState.WALL)
+        ) {
+          this._cells.set(currentKey, CellState.WHITE);
+        }
+      }
+    }
+
+    this.parent = new Map();
+    this.step = undefined;
+  }
+
   private getPossibleMoves(position: Position): Position[] {
     const directions: Position[] = [
       { row: -1, col: 0 },
