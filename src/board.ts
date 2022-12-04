@@ -109,6 +109,40 @@ export default class Board {
 
     this.step = step;
   }
+
+  public startDfs() {
+    const stack = [this.start];
+    const visited = new Set([this.positionKey(this.start)]);
+
+    const step = () => {
+      const current = stack.pop();
+
+      if (!current) return true;
+
+      const currentKey = this.positionKey(current);
+
+      this._cells.set(currentKey, CellState.BLACK);
+      if (currentKey === this.positionKey(this.end)) return true;
+
+      for (const p of this.getPossibleMoves(current)) {
+        const pKey = this.positionKey(p);
+
+        if (visited.has(pKey)) continue;
+
+        this._cells.set(pKey, CellState.GRAY);
+        visited.add(pKey);
+        this.parent.set(pKey, currentKey);
+        stack.push(p);
+
+        if (pKey === this.positionKey(this.end)) return true;
+      }
+
+      return false;
+    };
+
+    this.step = step;
+  }
+
   private renderPath() {
     let endParent = this.parent.get(this.positionKey(this.end));
 
