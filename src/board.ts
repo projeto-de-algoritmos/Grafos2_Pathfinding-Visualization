@@ -1,3 +1,4 @@
+import { MinPriorityQueue } from "@datastructures-js/priority-queue";
 import { Position } from "./position";
 import { CellState } from "./state";
 
@@ -135,6 +136,58 @@ export default class Board {
         stack.push(p);
 
         if (pKey === this.positionKey(this.end)) return true;
+      }
+
+      return false;
+    };
+
+    this.step = step;
+  }
+
+  public startAStar(
+    distanceFn: (origin: Position, destination: Position) => number
+  ) {
+    interface QueueElement {
+      position: Position;
+      cost: number;
+      distance: number;
+    }
+
+    const queue = new MinPriorityQueue<QueueElement>(
+      (e) => e.distance + e.cost
+    );
+
+    queue.enqueue({
+      position: this.start,
+      distance: distanceFn(this.start, this.end),
+      cost: 0,
+    });
+
+    const visited = new Set([this.positionKey(this.start)]);
+
+    const step = () => {
+      const current = queue.dequeue();
+
+      if (!current) return true;
+
+      const currentKey = this.positionKey(current.position);
+
+      this._cells.set(currentKey, CellState.BLACK);
+      if (currentKey === this.positionKey(this.end)) return true;
+
+      for (const p of this.getPossibleMoves(current.position)) {
+        const pKey = this.positionKey(p);
+
+        this._cells.set(pKey, CellState.GRAY);
+        visited.add(pKey);
+
+        this.parent.set(pKey, currentKey);
+
+        queue.enqueue({
+          position: p,
+          distance: distanceFn(p, this.end),
+          cost: current.cost + 1,
+        });
       }
 
       return false;
