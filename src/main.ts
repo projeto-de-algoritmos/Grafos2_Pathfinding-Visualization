@@ -1,6 +1,7 @@
 import "./style.css";
 import Board from "./board";
 import { euclideanDistance, manhattanDistance } from "./position";
+import { setupExampleButtons } from "./examples";
 
 const canvas$ = document.getElementById("board") as HTMLCanvasElement;
 const reset$ = document.getElementById("reset") as HTMLButtonElement;
@@ -61,8 +62,9 @@ export$.addEventListener("click", () => {
 const draw = () => {
   board.render();
 
-  // timeout = makeAnimationTimeout(speed);
   window.requestAnimationFrame(draw);
 };
+
+setupExampleButtons(board);
 
 draw();
