@@ -88,6 +88,33 @@ export default class Board {
     }
   }
 
+  public serialize() {
+    const walls: number[] = [];
+    this._cells.forEach((v, k) => {
+      if (v === CellState.WALL) walls.push(k);
+    });
+
+    return walls.map((w) => w.toString()).join(" ");
+  }
+
+  public deserialize(walls: string) {
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.cols; col++) {
+        const currentKey = this.positionKey({ row, col });
+        const current = this._cells.get(currentKey);
+
+        if (current !== CellState.END && current !== CellState.START) {
+          this._cells.set(currentKey, CellState.WHITE);
+        }
+      }
+    }
+
+    walls
+      .split(" ")
+      .map(Number)
+      .forEach((w) => this._cells.set(w, CellState.WALL));
+  }
+
   public lock() {
     this._locked = true;
   }
