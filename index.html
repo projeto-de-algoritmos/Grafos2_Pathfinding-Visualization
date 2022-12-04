@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pathfinding</title>
+  </head>
+  <body>
+    <div class="main">
+      <canvas id="board"></canvas>
+      <div class="instructions">
+        <h1>Instruções</h1>
+        <p>
+          O caminho sempre começa do canto superior direito e vai até o canto
+          inferior direito.
+        </p>
+        <p>
+          As paredes são representadas como espaços vermelhos, e podem ser
+          inseridas ou retiradas com o mouse.
+        </p>
+        <p>
+          Os espaços cinzas já foram visitados, e os beges são espaços
+          potenciais. Quando o algoritmo encontra um caminho, ele é desenhado em
+          amarelo.
+        </p>
+        <h2>Algoritmos</h2>
+        <ul>
+          <li><b>BFS</b> - Busca em largura.</li>
+          <li><b>DFS</b> - Busca em profundidade</li>
+          <li>
+            <b>A* Euclideana</b> - A* com heurística de distância Euclideana.
+            Essa heurística não é boa nessa situação, já que ela considera o movimento em diagonal, que é impossível.
+          </li>
+          <li>
+            <b>A* Manhattan</b> - A* com heurística de distância de Manhattan
+          </li>
+        </ul>
+        <hr />
+
+        <h2>Salvar layout</h2>
+        <textarea name="walls" id="walls" cols="50" rows="10"></textarea>
+        <div>
+          <button id="export">Exportar</button>
+          <button id="import">Importar</button>
+        </div>
+
+        <hr />
+        <h2>Exemplos</h2>
+        <button>Parede</button>
+        <button>Impossível</button>
+        <button>Complexo</button>
+      </div>
+    </div>
+
+    <div id="controls">
+      <label for="speed">Velocidade</label>
+      <input
+        type="range"
+        name="speed"
+        id="speed"
+        min="30"
+        max="300"
+        step="1"
+        value="300"
+      />
+
+      <button id="start">Encontrar caminho</button>
+      <span>usando</span>
+      <select name="strategy" id="strategy">
+        <option value="bfs">BFS</option>
+        <option value="dfs">DFS</option>
+        <option value="a*-euclideana">A* Euclideana</option>
+        <option value="a*-manhattan">A* Manhattan</option>
+      </select>
+
+      <button id="reset">Limpar tentativa</button>
+      <button id="reset-walls">Limpar paredes</button>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
