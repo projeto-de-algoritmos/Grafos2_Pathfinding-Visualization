@@ -1,0 +1,41 @@
+* {
+  padding: 0.25rem;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+  line-height: 1.5;
+}
+
+canvas {
+  border: 1px solid black;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+}
+
+.instructions {
+  margin: 1rem;
+}
+
+#start {
+  margin-left: 2rem;
+}
+
+#reset {
+  margin-left: 2rem;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+hr {
+  margin-top: 2rem;
+  height: 5px;
+  border: none;
+  border-top: 3px double black;
+  overflow: visible;
+  color: black;
+}
