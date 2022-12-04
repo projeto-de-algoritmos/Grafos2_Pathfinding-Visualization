@@ -145,7 +145,8 @@ export default class Board {
   }
 
   public startAStar(
-    distanceFn: (origin: Position, destination: Position) => number
+    distanceFn: (origin: Position, destination: Position) => number,
+    weight: number,
   ) {
     interface QueueElement {
       position: Position;
@@ -154,7 +155,7 @@ export default class Board {
     }
 
     const queue = new MinPriorityQueue<QueueElement>(
-      (e) => e.distance + e.cost
+      (e) => e.distance + weight * e.cost
     );
 
     queue.enqueue({
