@@ -106,4 +106,16 @@ export default class Board {
 
     this.render();
   }
+
+  get width() {
+    return this._width;
+  }
+
+  get height() {
+    return this._height;
+  }
+
+  get cells() {
+    return this._cells;
+  }
 }
