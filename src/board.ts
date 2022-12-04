@@ -12,6 +12,8 @@ export default class Board {
   private end: Position;
 
   private parent: Map<number, number> = new Map();
+
+  private step?: () => boolean;
   constructor(
     private _width: number,
     private _height: number,
