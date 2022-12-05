@@ -25,7 +25,15 @@ Foram implementados os seguintes algoritmos de pathfinding:
 - A* com heurística de distância de Manhattan
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+![Alt Text](/media/image1.png)
+![Alt Text](/media/image2.png)
+![Alt Text](/media/image3.png)
+![Alt Text](/media/image4.png)
+![Alt Text](/media/leet1.jpg)
+![Alt Text](/media/leet2.jpg)
+![Alt Text](/media/leet3.jpg)
+![Alt Text](/media/leet4.jpg)
 
 ## Instalação 
 
