@@ -24,12 +24,19 @@ Foram implementados os seguintes algoritmos de pathfinding:
 - A* com heurística de distância Euclideana
 - A* com heurística de distância de Manhattan
 
+Além disso, foram resolvidos 4 exercícios do juiz online Leetcode.
+
 ## Screenshots
+
+### Pathfinding Visualization
 
 ![Alt Text](/media/image1.png)
 ![Alt Text](/media/image2.png)
 ![Alt Text](/media/image3.png)
 ![Alt Text](/media/image4.png)
+
+### Submissões Leetcode
+
 ![Alt Text](/media/leet1.jpg)
 ![Alt Text](/media/leet2.jpg)
 ![Alt Text](/media/leet3.jpg)
@@ -37,7 +44,7 @@ Foram implementados os seguintes algoritmos de pathfinding:
 
 ## Instalação 
 
-**Linguagem**: Typescript
+**Linguagem**: Typescript & Python
 
 O projeto depende de `node` >= 16 e `yarn`.
 
