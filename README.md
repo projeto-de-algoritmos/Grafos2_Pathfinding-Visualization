@@ -44,7 +44,7 @@ Além disso, foram resolvidos 4 exercícios do juiz online Leetcode.
 
 ### Vídeo
 
-[O v](/media/compressed.mp4)
+[O vídeo pode ser encontrado aqui.](/media/compressed.mp4)
 
 ## Instalação 
 
