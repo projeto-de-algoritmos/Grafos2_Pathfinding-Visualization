@@ -49,13 +49,30 @@ yarn dev
 
 O projeto estará disponível em `localhost:5173`
 
+O projeto também está hospedado em https://pathfinder.puida.xyz
+
 ## Uso 
 
 As instruções detalhadas de uso podem ser encontradas na página do projeto.
 
+O programa sempre tenta encontrar um caminho do canto superior esquerdo (célula verde) até o canto inferior esquerdo (célula azul).
+O caminho não pode atravessar paredes (células vermelhas), que podem ser inseridas ou removidas com o mouse.
+
+Para iniciar uma busca, selecione o algoritmo (BFS, DFS, ...) e clique em `Encontrar caminho`.
+O algoritmo executará mostrando os caminhos considerados.
+
+Se um caminho for encontrado, a execução para e o caminho é mostrado em amarelo.
+Para iniciar uma nova busca, clique em `Limpar tentativa` execute os passos de execução novamente.
+
+Alguns exemplos de layout podem ser inseridos com os botões `Parede`, `Impossível` e `Complexo`.
+
+Para exportar ou importar um layout, o campo de texto na seção `Salvar Layout` pode ser usado.
+Para exportar, clique em `Exportar` e o layout ficará disponível no campo de texto.
+Para importar, cole o layout no campo de text e clique em `Importar`.
+
+Nos algoritmos de `A*`, o caminho atual é considerado na heurística.
+Para controlar o peso do tamanho atual, use o _slider_ abaixo das descrições dos algoritmos.
+
 ## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
 
-
-
-
+A única dependência externa (sem considerar as dependências de desenvolvimento) é uma implementação eficiente de fila de prioridade.
