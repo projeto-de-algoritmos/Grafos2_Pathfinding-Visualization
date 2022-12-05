@@ -24,8 +24,8 @@ export default class Board {
     private canvas: HTMLCanvasElement,
     private cellSize: number
   ) {
-    this.rows = Math.floor(this.height / cellSize);
-    this.cols = Math.floor(this.width / cellSize);
+    this.rows = Math.floor(this._height / cellSize);
+    this.cols = Math.floor(this._width / cellSize);
 
     for (let row = 0; row < this.rows; row++) {
       for (let col = 0; col < this.cols; col++) {
@@ -33,8 +33,8 @@ export default class Board {
       }
     }
 
-    this.canvas.setAttribute("width", this.width.toString());
-    this.canvas.setAttribute("height", this.height.toString());
+    this.canvas.setAttribute("width", this._width.toString());
+    this.canvas.setAttribute("height", this._height.toString());
 
     this.ctx = this.canvas.getContext("2d")!;
     this.ctx.strokeStyle = "black;";
@@ -42,8 +42,8 @@ export default class Board {
     this.start = { row: 0, col: 0 };
     this.end = { row: this.rows - 1, col: this.cols - 1 };
 
-    this.cells.set(this.positionKey(this.start), CellState.START);
-    this.cells.set(this.positionKey(this.end), CellState.END);
+    this._cells.set(this.positionKey(this.start), CellState.START);
+    this._cells.set(this.positionKey(this.end), CellState.END);
 
     this.canvas.addEventListener("mousedown", (e) => this.handleClick(e));
   }
@@ -146,7 +146,7 @@ export default class Board {
 
   public startAStar(
     distanceFn: (origin: Position, destination: Position) => number,
-    weight: number,
+    weight: number
   ) {
     interface QueueElement {
       position: Position;
@@ -233,18 +233,6 @@ export default class Board {
       .forEach((w) => this._cells.set(w, CellState.WALL));
   }
 
-  public lock() {
-    this._locked = true;
-  }
-
-  public unlock() {
-    this._locked = false;
-  }
-
-  get locked() {
-    return this._locked;
-  }
-
   public reset(resetWalls: boolean) {
     for (let row = 0; row < this.rows; row++) {
       for (let col = 0; col < this.cols; col++) {
@@ -277,7 +265,7 @@ export default class Board {
 
     return directions.flatMap((d) => {
       const pos = { row: position.row + d.row, col: position.col + d.col };
-      const state = this.cells.get(this.positionKey(pos));
+      const state = this._cells.get(this.positionKey(pos));
 
       return state === CellState.WHITE || state === CellState.END ? [pos] : [];
     });
@@ -307,15 +295,15 @@ export default class Board {
     this.render();
   }
 
-  get width() {
-    return this._width;
+  public lock() {
+    this._locked = true;
   }
 
-  get height() {
-    return this._height;
+  public unlock() {
+    this._locked = false;
   }
 
-  get cells() {
-    return this._cells;
+  get locked() {
+    return this._locked;
   }
 }
