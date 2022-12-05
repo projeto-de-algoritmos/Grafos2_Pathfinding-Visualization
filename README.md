@@ -42,6 +42,10 @@ Além disso, foram resolvidos 4 exercícios do juiz online Leetcode.
 ![Alt Text](/media/leet3.jpg)
 ![Alt Text](/media/leet4.jpg)
 
+### Vídeo
+
+[O v](/media/compressed.mp4)
+
 ## Instalação 
 
 **Linguagem**: Typescript & Python
